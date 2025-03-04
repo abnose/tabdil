@@ -62,8 +62,6 @@ const handleSearch = (event) => {
         ></div>
       </div>
     </header>
-    <div class="container mx-auto">
-      <NuxtPage />
-    </div>
+    <NuxtPage />
   </div>
 </template>
