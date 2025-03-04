@@ -20,7 +20,7 @@ const handleSearch = (event) => {
 <template>
   <div>
     <header
-      class="w-full h-[12rem] px-[9.75rem] bg-gradient-to-r from-[#2c2e30] to-[#0e0e0e] overflow-hidden relative"
+      class="w-full h-[12rem] px-[1rem] md:px-[9.75rem] bg-gradient-to-r from-[#2c2e30] to-[#0e0e0e] overflow-hidden relative"
     >
       <nav class="h-[3.5rem] py-[0.6rem]">
         <img src="/assets/image/logo & logotype.png" alt="logo" />
@@ -44,7 +44,7 @@ const handleSearch = (event) => {
           />
           <button
             type="submit"
-            class="flex justify-center items-center bg-[#DC2626] h-[3rem] gap-[0.5rem] text-white p-[1rem] rounded-[0.25rem]"
+            class="flex justify-center items-center cursor-pointer bg-[#DC2626] h-[3rem] gap-[0.5rem] text-white p-[1rem] rounded-[0.25rem]"
           >
             <img
               src="/assets/image/search-normal.png"
@@ -52,11 +52,13 @@ const handleSearch = (event) => {
               height="14px"
               alt="search"
             />
-            <span class="text-[0.875rem] leading-[1.375rem]"> Search </span>
+            <span class="text-[0.875rem] leading-[1.375rem] hidden md:block">
+              Search
+            </span>
           </button>
         </form>
         <div
-          class="absolute w-[12.5rem] h-[9.5rem] left-[18.375rem] top-[3.3125rem] bg-red-600 bg-opacity-30 filter blur-[5rem] flex-none order-1 flex-grow-0 z-10"
+          class="absolute hidden md:block w-[12.5rem] h-[9.5rem] left-[18.375rem] top-[3.3125rem] bg-red-600 bg-opacity-30 filter blur-[5rem] flex-none order-1 flex-grow-0 z-10"
         ></div>
       </div>
     </header>
