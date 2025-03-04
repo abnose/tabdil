@@ -1,11 +1,16 @@
-module.exports = {
-  purge: ["./pages/**/*.{vue,js}", "./components/**/*.{vue,js}"],
-  darkMode: false, // or 'media' or 'class'
+export default {
+  content: [
+    "./components/**/*.{vue,js}",
+    "./layouts/**/*.vue",
+    "./pages/**/*.vue",
+    "./app.vue",
+  ],
   theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
+    extend: {
+      colors: {
+        secondary: "#DC2626",
+      },
+    },
   },
   plugins: [],
 };
