@@ -7,7 +7,7 @@
         <img src="/assets/image/logo & logotype.png" alt="logo" />
       </nav>
       <div
-        class="w-full h-[23.5rem] pt-[3.5rem] bg-amber-800 md:pt-[2rem] pb-[1.5rem] flex justify-center items-center"
+        class="w-full h-[30.43rem] md:h-[23.5rem] pt-[3.5rem] bg-amber-800 md:pt-[2rem] pb-[1.5rem] flex justify-center items-center"
       >
         <div class="bg-amber-200 w-full h-[25.93rem] md:h-[15rem]"></div>
         <div
