@@ -17,4 +17,11 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig: {
+    public: {
+      marvelApiBase: "http://gateway.marvel.com/v1/public",
+      marvelApiKey: "ac03c225bd15490d6e2b599c0a235e4b",
+    },
+    marvelPrivateKey: "af7bae9a159113d7643fda340cb3549a33280859",
+  },
 });

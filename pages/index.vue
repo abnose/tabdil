@@ -50,7 +50,17 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useMarvelApi } from "~/composables/useApi";
+
+// const { data, pending, error } = await useAsyncData("characters", () =>
+//   useMarvelApi("comics")
+// );
+
+// const { data, pending, error } = await useAsyncData("search-characters", () =>
+//   useMarvelApi("characters", { query: { nameStartsWith: "ca" } })
+// );
+</script>
 
 <style>
 .p-paginator {
