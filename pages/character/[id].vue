@@ -7,7 +7,7 @@
         <img src="/assets/image/logo & logotype.png" alt="Website Logo" />
       </nav>
       <section
-        class="w-full h-[30.43rem] md:h-[23.5rem] pt-[3.5rem] md:pt-[2rem] pb-[1.5rem] flex justify-center items-center"
+        class="w-full h-[30.43rem] md:h-[23.5rem] pt-[3.5rem] lg:pt-[2rem] pb-[1.5rem] flex justify-center items-center"
       >
         <article
           class="w-full h-[25.93rem] flex-col lg:flex-row lg:h-[15rem] flex justify-start"
@@ -22,7 +22,7 @@
           >
             <h1 class="text-[1.5rem] lg:text-[2rem] font-medium">Thor</h1>
             <p
-              class="xl:text-[0.87rem] font-normal lg:leading-[1.36rem] md:text-[0.65rem] text-[0.75rem] leading-[1.17rem]"
+              class="xl:text-[0.87rem] font-normal lg:leading-[1.36rem] md:text-[0.55rem] text-[0.75rem] leading-[1.17rem]"
             >
               As the Norse God of thunder and lightning, Thor wields one of the
               greatest weapons ever made, the enchanted hammer Mjolnir. While
