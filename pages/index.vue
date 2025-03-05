@@ -1,5 +1,11 @@
 <template>
   <div class="flex flex-col items-center w-full h-full bg-[#2C2E30]">
+    <div
+      v-if="pending"
+      class="fixed flex justify-center items-center z-[5555] top-0 left-0 backdrop-blur-[5px] w-full h-[100vh]"
+    >
+      <img src="/assets/image/hero.gif" alt="Hero" />
+    </div>
     <header
       class="w-full h-[12rem] px-[1rem] md:px-[9.75rem] bg-gradient-to-r from-[#2c2e30] to-[#0e0e0e] overflow-hidden relative"
     >
@@ -20,8 +26,7 @@
             placeholder="Search for characters..."
             aria-label="Search"
             class="flex text-[0.875rem] flex-row items-center p-[0.84rem_0.5rem_0.84rem_1rem] gap-[0.625rem] h-[3rem] placeholder-white placeholder:text-[0.875rem] bg-[#3B3D3F] rounded-[0.25rem] text-white flex-none order-0 flex-grow"
-            :value="searchQuery"
-            @input="handleInputChange"
+            v-model="search"
           />
           <button
             type="submit"
@@ -47,78 +52,72 @@
       class="px-[1rem] md:px-[6rem] lg:px-[9.75rem] mt-[2rem] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 w-full h-full bg-[#2C2E30] rounded-[16px] p-4"
       aria-label="Content Grid"
     >
-      <ItemCard
-        v-for="character in characters?.data?.results"
+      <div
+        v-for="character in data?.data?.results"
         :key="character.id"
-        :to="`/character/${character.id}`"
-        :imgSrc="character.thumbnail.path + '.' + character.thumbnail.extension"
-        :altText="character.name"
-        :name="character.name"
-      />
+        class=""
+      >
+        <ItemCard
+          v-if="data?.data?.total"
+          :to="`/character/${character.id}`"
+          :imgSrc="
+            character.thumbnail.path + '.' + character.thumbnail.extension
+          "
+          :altText="character.name"
+          :name="character.name"
+        />
+      </div>
+      <div v-if="!data?.data?.total" class="h-full">No Character Found</div>
     </main>
-
     <footer
       class="px-[1rem] md:px-[6rem] lg:px-[9.75rem] mt-[1.5rem] mb-[4rem] gap-6 w-full h-full bg-[#2C2E30] rounded-[16px]"
       aria-label="Pagination Controls"
     >
       <Paginator
+        v-if="data?.data?.total"
+        :first="(page - 1) * 12"
+        :currentPage="page - 1"
         @page="handlePageChange"
-        :rows="10"
-        :totalRecords="120"
+        :rows="12"
+        :totalRecords="data?.data?.total"
       ></Paginator>
     </footer>
   </div>
 </template>
 
 <script setup>
-import { useMarvelApi } from "~/composables/useApi";
 import { ref } from "vue";
-import { useRouter } from "vue-router";
-const characters = ref();
+import { useRouter, useRoute } from "vue-router";
+const route = useRoute();
 const searchQuery = ref("");
+const search = ref("");
+const page = ref(route.query.page || 1);
 const router = useRouter();
-
-const handleInputChange = (event) => {
-  searchQuery.value = event.target.value;
-};
 
 const handleSearch = (event) => {
   event.preventDefault();
-  initialRequest(12, 0, searchQuery.value);
+  searchQuery.value = search.value;
+  page.value = 1;
 };
 
-// const { data, pending, error } = await useMarvelApi("characters", {
-//   query: {
-//     limit: 12,
-//     offset: 0,
-//   },
-// });
-
-// const { data, pending, error } = await useAsyncData("search-characters", () =>
-//   useMarvelApi("characters", { query: { nameStartsWith: "ca" } })
-// );
-
-const initialRequest = async (limit = 12, offset = 0, searchQuery = "") => {
-  const { data } = await useAsyncData("search-characters", () =>
-    useMarvelApi("characters", {
-      query: {
-        limit: limit || 11,
-        offset: offset || 0,
-        ...(searchQuery && { nameStartsWith: searchQuery }),
-      },
-    })
-  );
-
-  characters.value = data.value; // Extract the actual data
+const handlePageChange = async (event) => {
+  page.value = event?.page + 1;
+  router.replace({ query: { page: page.value } });
+  handleScrollTop();
 };
 
-const handlePageChange = async (page) => {
-  const offset = page?.page * 12;
-  const limit = (page?.page + 1) * 12;
-  initialRequest(limit, offset);
-};
+watch(
+  () => route.query.page,
+  (newValue) => {
+    page.value = newValue;
+    handleScrollTop();
+  }
+);
 
-initialRequest();
+const { data, pending, error, refresh } = useFetch("/api/marvel", {
+  params: { page, searchQuery },
+  watch: [page?.value, search?.value],
+});
 </script>
 
 <style>
