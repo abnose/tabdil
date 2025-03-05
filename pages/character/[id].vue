@@ -7,9 +7,51 @@
         <img src="/assets/image/logo & logotype.png" alt="logo" />
       </nav>
       <div
-        class="w-full h-[30.43rem] md:h-[23.5rem] pt-[3.5rem] bg-amber-800 md:pt-[2rem] pb-[1.5rem] flex justify-center items-center"
+        class="w-full h-[30.43rem] md:h-[23.5rem] pt-[3.5rem] md:pt-[2rem] pb-[1.5rem] flex justify-center items-center"
       >
-        <div class="bg-amber-200 w-full h-[25.93rem] md:h-[15rem]"></div>
+        <div
+          class="bg-amber-200 w-full h-[25.93rem] flex-col lg:flex-row lg:h-[15rem] flex justify-start"
+        >
+          <img
+            class="bg-red-100 min-w-[11.25rem] min-h-[11.25rem] max-w-[11.25rem] max-h-[11.25rem] lg:min-w-[15rem] lg:min-h-[15rem] lg:max-w-[15rem] lg:max-h-[15rem]"
+            src=""
+            alt="test"
+          />
+          <div
+            class="flex flex-col items-start my-[2.375rem] mt-[1rem] ml-[0rem] lg:ml-[3rem] gap-[1rem] h-[10.25rem] bg-blue-700"
+          >
+            <h1 class="text-[1.5rem] lg:text-[2rem] font-medium">Thor</h1>
+            <p
+              class="lg:text-[0.87rem] font-normal lg:leading-[1.36rem] text-[0.75rem] leading-[1.17rem]"
+            >
+              As the Norse God of thunder and lightning, Thor wields one of the
+              greatest weapons ever made, the enchanted hammer Mjolnir. While
+              others have described Thor as an over-muscled, oafish imbecile,
+              he's quite smart and compassionate. He's self-assured, and he
+              would never, ever stop fighting for a worthwhile cause.
+            </p>
+            <div class="flex gap-[1rem]">
+              <a
+                class="box-border flex flex-row justify-center items-center p-2 gap-2 w-24 h-9 border border-gray-300 rounded-md"
+                href=""
+              >
+                <span class="text-[0.75rem] lg:text-[0.875]">Details</span>
+                <img src="/assets//image/export.png" alt="Link"
+              /></a>
+              <a
+                class="box-border flex flex-row justify-center items-center p-2 gap-2 w-24 h-9 border border-gray-300 rounded-md"
+                href=""
+                ><span class="text-[0.75rem] lg:text-[0.875]">Wiki</span>
+              </a>
+              <a
+                class="box-border flex flex-row justify-center items-center p-2 gap-2 w-24 h-9 border border-gray-300 rounded-md"
+                href=""
+              >
+                <span class="text-[0.75rem] lg:text-[0.875]">ComicLink</span>
+              </a>
+            </div>
+          </div>
+        </div>
         <div
           className="absolute w-[200px] h-[152px] left-[10%] md:left-[294px] lg:left-[494px] top-[113px] bg-red-600/32 blur-[80px] z-[1]"
         ></div>
