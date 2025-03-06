@@ -90,16 +90,25 @@ const search = ref(route.query.search || "");
 const page = ref(+route.query.page || 1);
 const router = useRouter();
 
+const handleQuery = () => {
+  router.push({
+    query: {
+      page: page.value,
+      ...(searchQuery.value && { search: searchQuery.value }),
+    },
+  });
+};
+
 const handleSearch = (event) => {
   event.preventDefault();
   searchQuery.value = search.value;
   page.value = 1;
-  router.push({ query: { page: page.value, search: searchQuery.value } });
+  handleQuery();
 };
 
 const handlePageChange = async (event) => {
   page.value = +event?.page + 1;
-  router.push({ query: { page: page.value, search: searchQuery.value } });
+  handleQuery();
   handleScrollTop();
 };
 
