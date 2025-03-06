@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-
+import generateHash from '../utils/generateHash';
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig();
     const id = getRouterParam(event, 'id');
@@ -8,11 +8,7 @@ export default defineEventHandler(async (event) => {
         throw createError({ statusCode: 400, statusMessage: 'Character ID is required' });
     }
 
-    const ts = Date.now().toString();
-    const hash = crypto
-        .createHash('md5')
-        .update(ts + config.marvelPrivateKey + config.public.marvelApiKey)
-        .digest('hex');
+    const { hash, ts } = generateHash()
 
     const marvelUrl = `${config.public.marvelApiBase}/characters/${id}?apikey=${config.public.marvelApiKey}&ts=${ts}&hash=${hash}`;
 

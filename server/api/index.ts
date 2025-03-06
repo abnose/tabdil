@@ -1,15 +1,10 @@
 import crypto from "crypto";
-
+import generateHash from "../utils/generateHash";
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
   const query = getQuery(event);
-  console.log('query =', query)
-  const ts = Date.now().toString();
-  const hash = crypto
-    .createHash("md5")
-    .update(ts + config.marvelPrivateKey + config.public.marvelApiKey)
-    .digest("hex");
-
+  const { hash, ts } = generateHash()
+  console.log(hash)
   const limit = 12;
   const page = Number(query.page) || 1;
   const offset = (page - 1) * limit;

@@ -44,7 +44,7 @@
           </button>
         </form>
         <div
-          class="absolute hidden md:block w-[12.5rem] h-[9.5rem] left-[18.375rem] top-[3.3125rem] bg-red-600 bg-opacity-30 filter blur-[5rem] flex-none order-1 flex-grow-0 z-10"
+          class="absolute hidden md:block w-[12.5rem] h-[9.5rem] left-[18.375rem] top-[3.3125rem] bg-red-600/32 bg-opacity-30 filter blur-[5rem] flex-none order-1 flex-grow-0 z-10"
         ></div>
       </div>
     </header>
@@ -122,7 +122,7 @@ watch(
   }
 );
 
-const { data, pending, error, refresh } = useFetch("/api/marvel", {
+const { data, pending, error, refresh } = useFetch("/api/", {
   params: { page, searchQuery },
   watch: [page?.value, searchQuery?.value],
 });
