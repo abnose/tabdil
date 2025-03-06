@@ -3,7 +3,6 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
   const query = getQuery(event);
   const { hash, ts } = generateHash()
-  console.log(hash)
   const limit = 12;
   const page = Number(query.page) || 1;
   const offset = (page - 1) * limit;
