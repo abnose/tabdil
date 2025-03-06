@@ -1,5 +1,8 @@
 <template>
-  <div class="flex flex-col items-center w-full h-full bg-[#2C2E30]">
+  <div
+    v-if="!characterError"
+    class="flex flex-col items-center w-full h-full bg-[#2C2E30]"
+  >
     <div
       v-if="characterPending"
       class="fixed flex justify-center items-center z-[5555] top-0 left-0 backdrop-blur-[5px] w-full h-[100vh]"
@@ -53,23 +56,39 @@
       ></div>
     </header>
     <CardContainer title="Stories" :loading="storiesPending">
-      <ComicCard
-        v-for="story in storiesList?.data?.results"
-        :key="story.id"
-        :imgSrc="story?.thumbnail?.path + '.' + story?.thumbnail?.extension"
-        :altText="story.title"
-        :name="story.title"
-      />
+      <div v-for="story in storiesList?.data?.results" :key="story.id">
+        <ComicCard
+          v-if="storiesList?.data?.total"
+          :imgSrc="story?.thumbnail?.path + '.' + story?.thumbnail?.extension"
+          :altText="story.title"
+          :name="story.title"
+        />
+      </div>
+      <div v-if="!storiesList?.data?.total && !storiesPending" class="h-full">
+        No Story Found
+      </div>
     </CardContainer>
     <CardContainer title="Comics" :loading="comicsPending">
-      <ComicCard
-        v-for="comic in comicsList?.data?.results"
-        :key="comic.id"
-        :imgSrc="comic?.thumbnail?.path + '.' + comic?.thumbnail?.extension"
-        :altText="comic?.title"
-        :name="comic?.title"
-      />
+      <div v-for="comic in comicsList?.data?.results" :key="comic.id">
+        <ComicCard
+          v-if="comicsList?.data?.total"
+          :imgSrc="comic?.thumbnail?.path + '.' + comic?.thumbnail?.extension"
+          :altText="comic?.title"
+          :name="comic?.title"
+        />
+      </div>
+      <div v-if="!comicsList?.data?.total && !comicsPending" class="h-full">
+        No Comic Found
+      </div>
     </CardContainer>
+  </div>
+  <div
+    v-else
+    class="flex flex-col justify-center items-center w-full h-full bg-[#2C2E30]"
+  >
+    <p class="md:text-[1rem] xl:text-[5rem] absolute top-[40%]">
+      Invalid Id or Network Error
+    </p>
   </div>
 </template>
 
