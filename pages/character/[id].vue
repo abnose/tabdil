@@ -1,5 +1,11 @@
 <template>
   <div class="flex flex-col items-center w-full h-full bg-[#2C2E30]">
+    <div
+      v-if="characterPending"
+      class="fixed flex justify-center items-center z-[5555] top-0 left-0 backdrop-blur-[5px] w-full h-[100vh]"
+    >
+      <img src="/assets/image/hero.gif" alt="Hero" />
+    </div>
     <header
       class="w-full h-[36rem] md:h-[27rem] px-[1rem] md:px-[9.75rem] bg-gradient-to-r from-[#2c2e30] to-[#0e0e0e] overflow-hidden relative"
     >
@@ -13,47 +19,33 @@
           class="w-full h-[25.93rem] flex-col lg:flex-row lg:h-[15rem] flex justify-start"
         >
           <img
-            class="bg-red-100 min-w-[11.25rem] min-h-[11.25rem] max-w-[11.25rem] max-h-[11.25rem] lg:min-w-[15rem] lg:min-h-[15rem] lg:max-w-[15rem] lg:max-h-[15rem] rounded-lg"
-            src=""
-            alt="Thor Image"
+            class="min-w-[11.25rem] object-fill min-h-[11.25rem] max-w-[11.25rem] max-h-[11.25rem] lg:min-w-[15rem] lg:min-h-[15rem] lg:max-w-[15rem] lg:max-h-[15rem] rounded-lg"
+            :src="
+              characterList?.data?.results[0]?.thumbnail?.path +
+              '.' +
+              characterList?.data?.results[0]?.thumbnail?.extension
+            "
+            :alt="characterList?.data?.results[0]?.name"
+            @error="handleImageError"
           />
           <div
             class="flex flex-col items-start my-[2.375rem] mt-[1rem] ml-[0rem] lg:ml-[3rem] gap-[1rem] h-[10.25rem]"
           >
-            <h1 class="text-[1.5rem] lg:text-[2rem] font-medium">Thor</h1>
+            <h1 class="text-[1.5rem] lg:text-[2rem] font-medium">
+              {{ characterList?.data?.results[0]?.name }}
+            </h1>
             <p
               class="xl:text-[0.87rem] font-normal lg:leading-[1.36rem] md:text-[0.55rem] text-[0.75rem] leading-[1.17rem]"
             >
-              As the Norse God of thunder and lightning, Thor wields one of the
-              greatest weapons ever made, the enchanted hammer Mjolnir. While
-              others have described Thor as an over-muscled, oafish imbecile,
-              he's quite smart and compassionate. He's self-assured, and he
-              would never, ever stop fighting for a worthwhile cause.
+              {{ characterList?.data?.results[0]?.description }}
             </p>
             <div class="flex gap-[1rem]">
-              <a
-                class="box-border flex flex-row justify-center items-center px-[1rem] py-[0.5rem] gap-2 h-9 border border-gray-300 rounded-md"
-                href=""
-              >
-                <img src="/assets/image/export.png" alt="Details Link" />
-                <span class="text-[0.75rem] lg:text-[0.875]">Details</span>
-              </a>
-              <a
-                class="box-border flex flex-row justify-center items-center px-[1rem] py-[0.5rem] gap-2 h-9 border border-gray-300 rounded-md"
-                href=""
-              >
-                <img src="/assets/image/export.png" alt="Details Link" />
-
-                <span class="text-[0.75rem] lg:text-[0.875]">Wiki</span>
-              </a>
-              <a
-                class="box-border flex flex-row justify-center items-center px-[1rem] py-[0.5rem] gap-2 h-9 border border-gray-300 rounded-md"
-                href=""
-              >
-                <img src="/assets/image/export.png" alt="Details Link" />
-
-                <span class="text-[0.75rem] lg:text-[0.875]">ComicLink</span>
-              </a>
+              <DetailLink
+                v-for="link in characterList?.data?.results[0]?.urls"
+                :key="link.type"
+                :href="link.url"
+                :text="link.type"
+              />
             </div>
           </div>
         </article>
@@ -62,52 +54,53 @@
         className="absolute w-[200px] h-[152px] left-[10%] md:left-[294px] lg:left-[494px] top-[113px] bg-red-600/32 blur-[80px] z-[1]"
       ></div>
     </header>
-
-    <main
-      class="px-[1rem] md:px-[6rem] lg:px-[9.75rem] mt-[2rem] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 w-full h-full bg-[#2C2E30] rounded-[16px] p-4"
-      aria-label="Content Grid"
-    >
-      <article
-        class="box-border flex flex-col items-start p-4 gap-4 w-full min-w-[20rem] min-h-[29rem] max-h-[33.8rem] border border-[#404244] rounded-[16px] mx-auto"
-        aria-labelledby="item1-title"
-      >
-        <img
-          class="w-full h-[29.31rem] p-[1rem] bg-amber-200 rounded-[.5rem]"
-          src=""
-          alt="Item Image"
-        />
-        <p class="text-[1rem] pr-[1rem]">Description for item 1.</p>
-      </article>
-      <article
-        class="box-border flex flex-col items-center p-4 gap-4 w-full min-w-[20rem] min-h-[29rem] max-h-[33.8rem] border border-[#404244] rounded-[16px] mx-auto"
-        aria-labelledby="item2-title"
-      >
-        <h2 id="item2-title" class="text-lg font-semibold">Item 2 Title</h2>
-        <p>Description for item 2.</p>
-      </article>
-      <article
-        class="box-border flex flex-col items-center p-4 gap-4 w-full min-w-[20rem] min-h-[29rem] max-h-[33.8rem] border border-[#404244] rounded-[16px] mx-auto"
-        aria-labelledby="item3-title"
-      >
-        <h2 id="item3-title" class="text-lg font-semibold">Item 3 Title</h2>
-        <p>Description for item 3.</p>
-      </article>
-      <article
-        class="box-border flex flex-col items-center p-4 gap-4 w-full min-w-[20rem] min-h-[29rem] max-h-[33.8rem] border border-[#404244] rounded-[16px] mx-auto"
-        aria-labelledby="item4-title"
-      >
-        <h2 id="item4-title" class="text-lg font-semibold">Item 4 Title</h2>
-        <p>Description for item 4.</p>
-      </article>
-    </main>
+    <CardContainer title="Stories" :loading="storiesPending">
+      <ComicCard
+        v-for="story in storiesList?.data?.results"
+        :key="story.id"
+        :imgSrc="story?.thumbnail?.path + '.' + story?.thumbnail?.extension"
+        :altText="story.title"
+        :name="story.title"
+      />
+    </CardContainer>
+    <CardContainer title="Comics" :loading="comicsPending">
+      <ComicCard
+        v-for="comic in comicsList?.data?.results"
+        :key="comic.id"
+        :imgSrc="comic?.thumbnail?.path + '.' + comic?.thumbnail?.extension"
+        :altText="comic?.title"
+        :name="comic?.title"
+      />
+    </CardContainer>
   </div>
 </template>
 
-<style>
-.clamp-text {
-  display: -webkit-box;
-  -webkit-line-clamp: 4; /* Adjust as needed */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-</style>
+<style></style>
+<script setup>
+import { useRoute } from "vue-router";
+const route = useRoute();
+const characterId = route.params.id;
+import image from "@/assets/image/Frame.png";
+
+const handleImageError = (event) => {
+  event.target.src = image;
+};
+
+const {
+  data: characterList,
+  pending: characterPending,
+  error: characterError,
+} = useFetch(`/api/${characterId}`);
+
+const {
+  data: comicsList,
+  pending: comicsPending,
+  error: comicsError,
+} = useFetch(`/api/${characterId}/comics`);
+
+const {
+  data: storiesList,
+  pending: storiesPending,
+  error: storiesError,
+} = useFetch(`/api/${characterId}/stories`);
+</script>

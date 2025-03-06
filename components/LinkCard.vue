@@ -5,6 +5,10 @@ defineProps({
   altText: { type: String, default: "Image" },
   name: { type: String, required: true },
 });
+
+const handleImageError = (event) => {
+  event.target.src = image;
+};
 </script>
 
 <template>
@@ -15,8 +19,9 @@ defineProps({
     >
       <img
         class="w-full object-fill h-[29.31rem] bg-[#999C9F52] rounded-[.5rem]"
-        :src="imgSrc"
+        :src="imgSrc || '/assets/image/Frame.png'"
         :alt="altText"
+        @error="handleImageError"
       />
       <p class="text-[1rem] pr-[1rem]" id="item-name">{{ name }}</p>
     </article>

@@ -52,12 +52,8 @@
       class="px-[1rem] md:px-[6rem] lg:px-[9.75rem] mt-[2rem] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 w-full h-full bg-[#2C2E30] rounded-[16px] p-4"
       aria-label="Content Grid"
     >
-      <div
-        v-for="character in data?.data?.results"
-        :key="character.id"
-        class=""
-      >
-        <ItemCard
+      <div v-for="character in data?.data?.results" :key="character.id">
+        <LinkCard
           v-if="data?.data?.total"
           :to="`/character/${character.id}`"
           :imgSrc="
@@ -67,7 +63,9 @@
           :name="character.name"
         />
       </div>
-      <div v-if="!data?.data?.total" class="h-full">No Character Found</div>
+      <div v-if="!data?.data?.total && !pending" class="h-full">
+        No Character Found
+      </div>
     </main>
     <footer
       class="px-[1rem] md:px-[6rem] lg:px-[9.75rem] mt-[1.5rem] mb-[4rem] gap-6 w-full h-full bg-[#2C2E30] rounded-[16px]"
@@ -91,7 +89,7 @@ import { useRouter, useRoute } from "vue-router";
 const route = useRoute();
 const searchQuery = ref("");
 const search = ref("");
-const page = ref(route.query.page || 1);
+const page = ref(+route.query.page || 1);
 const router = useRouter();
 
 const handleSearch = (event) => {
@@ -101,7 +99,7 @@ const handleSearch = (event) => {
 };
 
 const handlePageChange = async (event) => {
-  page.value = event?.page + 1;
+  page.value = +event?.page + 1;
   router.replace({ query: { page: page.value } });
   handleScrollTop();
 };
@@ -109,7 +107,7 @@ const handlePageChange = async (event) => {
 watch(
   () => route.query.page,
   (newValue) => {
-    page.value = newValue;
+    page.value = +newValue;
     handleScrollTop();
   }
 );
