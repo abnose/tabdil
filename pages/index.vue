@@ -9,9 +9,7 @@
     <header
       class="w-full h-[12rem] px-[1rem] md:px-[9.75rem] bg-gradient-to-r from-[#2c2e30] to-[#0e0e0e] overflow-hidden relative"
     >
-      <nav class="h-[3.5rem] py-[0.6rem]">
-        <img src="/assets/image/logo & logotype.png" alt="logo" />
-      </nav>
+      <CustomNavBar />
       <div
         class="w-full h-[8.5rem] pt-[2rem] pb-[1.5rem] flex justify-center items-center"
       >
