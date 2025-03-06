@@ -52,22 +52,9 @@
         </article>
       </section>
       <div
-        className="absolute w-[200px] h-[152px] left-[10%] md:left-[294px] lg:left-[494px] top-[113px] bg-red-600/32 blur-[80px] z-[1]"
+        className="absolute w-[200px] h-[152px] left-[10%] md:left-[294px] lg:left-[494px] top-[113px] bg-red-600/32 blur-[80px] z-[5]"
       ></div>
     </header>
-    <CardContainer title="Stories" :loading="storiesPending">
-      <div v-for="story in storiesList?.data?.results" :key="story.id">
-        <ComicCard
-          v-if="storiesList?.data?.total"
-          :imgSrc="story?.thumbnail?.path + '.' + story?.thumbnail?.extension"
-          :altText="story.title"
-          :name="story.title"
-        />
-      </div>
-      <div v-if="!storiesList?.data?.total && !storiesPending" class="h-full">
-        No Story Found
-      </div>
-    </CardContainer>
     <CardContainer title="Comics" :loading="comicsPending">
       <div v-for="comic in comicsList?.data?.results" :key="comic.id">
         <ComicCard
@@ -79,6 +66,19 @@
       </div>
       <div v-if="!comicsList?.data?.total && !comicsPending" class="h-full">
         No Comic Found
+      </div>
+    </CardContainer>
+    <CardContainer title="Stories" :loading="storiesPending">
+      <div v-for="story in storiesList?.data?.results" :key="story.id">
+        <ComicCard
+          v-if="storiesList?.data?.total"
+          :imgSrc="story?.thumbnail?.path + '.' + story?.thumbnail?.extension"
+          :altText="story.title"
+          :name="story.title"
+        />
+      </div>
+      <div v-if="!storiesList?.data?.total && !storiesPending" class="h-full">
+        No Story Found
       </div>
     </CardContainer>
   </div>
