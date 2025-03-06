@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col items-center w-full h-full bg-[#2C2E30]">
+  <div
+    class="flex overflow-hidden flex-col items-center w-full h-full bg-[#2C2E30]"
+  >
     <div
       v-if="pending"
       class="fixed flex justify-center items-center z-[5555] top-0 left-0 backdrop-blur-[5px] w-full h-[100vh]"
@@ -66,7 +68,7 @@
       </div>
     </main>
     <footer
-      class="px-[1rem] md:px-[6rem] lg:px-[9.75rem] mt-[1.5rem] mb-[4rem] gap-6 w-full h-full bg-[#2C2E30] rounded-[16px]"
+      class="px-[1rem] flex justify-center items-center md:px-[6rem] lg:px-[9.75rem] mt-[1.5rem] mb-[4rem] gap-6 w-full h-full rounded-[16px]"
       aria-label="Pagination Controls"
     >
       <Paginator
@@ -134,6 +136,19 @@ const { data, pending, error, refresh } = useFetch("/api/marvel", {
 .p-paginator-page.p-paginator-page-selected {
   background: #dc2626 !important;
 }
+
+@media (max-width: 425px) {
+  .p-paginator {
+    width: 450px;
+    transform: scale(0.88); /* Adjust scale for better visibility */
+  }
+}
+@media (max-width: 320px) {
+  .p-paginator {
+    transform: scale(0.7); /* Adjust scale for better visibility */
+  }
+}
+
 :root {
   --p-paginator-gap: 0.5rem;
 }
