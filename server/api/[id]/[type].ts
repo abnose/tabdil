@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+
 import generateHash from '~/server/utils/generateHash';
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig();
