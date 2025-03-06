@@ -1,7 +1,18 @@
 <script setup></script>
 
 <template>
-  <div>
+  <Transition name="fade">
     <NuxtPage />
-  </div>
+  </Transition>
 </template>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
