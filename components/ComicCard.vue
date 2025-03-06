@@ -21,6 +21,7 @@ const handleImageError = (event) => {
       class="w-full object-fill h-[29.31rem] rounded-[.5rem]"
       :src="imgSrc"
       :alt="altText"
+      loading="lazy"
       @error="handleImageError"
     />
     <p class="text-[1rem] pr-[1rem]" id="item-name">{{ name }}</p>
