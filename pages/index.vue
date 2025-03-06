@@ -140,12 +140,12 @@ const { data, pending, error, refresh } = useFetch("/api/marvel", {
 @media (max-width: 425px) {
   .p-paginator {
     width: 450px;
-    transform: scale(0.88); /* Adjust scale for better visibility */
+    transform: scale(0.88);
   }
 }
 @media (max-width: 320px) {
   .p-paginator {
-    transform: scale(0.7); /* Adjust scale for better visibility */
+    transform: scale(0.7);
   }
 }
 
