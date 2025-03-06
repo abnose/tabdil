@@ -85,8 +85,8 @@
 import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 const route = useRoute();
-const searchQuery = ref("");
-const search = ref("");
+const searchQuery = ref(route.query.search || "");
+const search = ref(route.query.search || "");
 const page = ref(+route.query.page || 1);
 const router = useRouter();
 
@@ -94,11 +94,12 @@ const handleSearch = (event) => {
   event.preventDefault();
   searchQuery.value = search.value;
   page.value = 1;
+  router.push({ query: { page: page.value, search: searchQuery.value } });
 };
 
 const handlePageChange = async (event) => {
   page.value = +event?.page + 1;
-  router.replace({ query: { page: page.value } });
+  router.push({ query: { page: page.value, search: searchQuery.value } });
   handleScrollTop();
 };
 
@@ -112,7 +113,7 @@ watch(
 
 const { data, pending, error, refresh } = useFetch("/api/marvel", {
   params: { page, searchQuery },
-  watch: [page?.value, search?.value],
+  watch: [page?.value, searchQuery?.value],
 });
 </script>
 
