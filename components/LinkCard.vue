@@ -5,6 +5,7 @@ defineProps({
   altText: { type: String, default: "Image" },
   name: { type: String, required: true },
 });
+import image from "@/assets/image/Frame.png";
 
 const handleImageError = (event) => {
   event.target.src = image;
@@ -18,7 +19,7 @@ const handleImageError = (event) => {
       aria-labelledby="item-name"
     >
       <img
-        class="w-full object-fill h-[29.31rem] bg-[#999C9F52] rounded-[.5rem]"
+        class="w-full object-fill h-[29.31rem] rounded-[.5rem]"
         :src="imgSrc || '/assets/image/Frame.png'"
         :alt="altText"
         @error="handleImageError"
